@@ -82,6 +82,21 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
 - [ ] If a fix or docs change lands, a resolution pointer is posted back to the original 2021
       discussion #6987.
 
+## Status Notes
+
+- **2026-07-12 — maintainer direction (first reply).**
+  [CaselIT replied](https://github.com/sqlalchemy/sqlalchemy/discussions/13428#discussioncomment-17614458)
+  (same maintainer who suspected StaticPool in 2021's #6987): *"I guess the docs could do a
+  better job here, but ultimately I'm not sure this can behave any differently unless we were
+  to enforce a single checked out connection at a time, using an AssertionPool or similar."*
+  Read: **docs warning — receptive; behavioral guard — skeptical** (hard exclusivity is the
+  only mechanism he sees, and it would break legitimate usage), matching this task's
+  Implementation Notes prediction. Next move: confirm a Gerrit docs patch would be accepted,
+  gently probe whether a warn-not-raise middle ground is worth anything, and mention
+  AssertionPool visibility for test suites. Reply drafted at
+  `tasks/working_artifacts/ISSUE-0001/reply-draft-13428-2026-07-12.md` — awaiting operator
+  approval before posting.
+
 ## Implementation Notes
 
 - **First action each session: check #13428 for replies.** `gh` CLI is installed and OAuth'd
