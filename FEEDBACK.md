@@ -19,6 +19,12 @@ Related: [tasks/feedback_handling.md](./tasks/feedback_handling.md) -- format, t
 
 _(Agent-originated feedback about how sessions or collaboration felt. Non-blocking. Human reviews and acknowledges or acts on at session start. Examples: felt whipsawed by rapid direction changes, scope shifted mid-execution without re-alignment, context was thin, instructions conflicted.)_
 
+- **2026-07-12** — Productive session. The "implement and test on the clone before suggesting
+  anything upstream" directive was the right call and clearly raised the quality of the #13428
+  engagement — it caught our own cache=shared error before it reached a maintainer and turned a
+  speculative reply into a validated one. Worth keeping as a standing norm for this repo:
+  no untested upstream suggestions.
+
 ---
 
 ## From Human
