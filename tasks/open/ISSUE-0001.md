@@ -134,6 +134,17 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   direction criterion effectively satisfied (docs: yes — rewrite underway; guard: prototype
   offered, no commitment sought).
 
+- **2026-07-12 — zzzeek demo scripts (crossed with our post; HOLDING).**
+  [zzzeek replied 22:09Z](https://github.com/sqlalchemy/sqlalchemy/discussions/13428#discussioncomment-17615506)
+  — 2 min after our post, almost certainly composed without seeing it — with demo scripts
+  showing StaticPool loss + shared-cache working, noting interleave → "database is locked",
+  no silent failure. **Verified locally: his shared-cache demo shape (s1 commits before s2
+  starts) passes even on broken StaticPool** — it demonstrates normal operation, not the
+  failure-mode fix; the discriminating test is the interleaved shape (ours, already posted).
+  Decision: **no immediate follow-up** — our post already carries the discriminating data;
+  wait for him to read it. Follow-up trigger: docs rewrite lands with non-interleaved
+  examples/tests, or he responds. Then offer the interleaved-shape variant gently.
+
 ## Implementation Notes
 
 - **First action each session: check #13428 for replies.** `gh` CLI is installed and OAuth'd
@@ -164,4 +175,4 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   `tasks/working_artifacts/issue-0018-aiosqlite-staticpool/` (repro, matrix runner,
   as-posted upstream draft stamped with the URL).
 
-<!-- version: v2026.07.12.04 -->
+<!-- version: v2026.07.12.05 -->
