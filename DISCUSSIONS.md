@@ -16,7 +16,7 @@ format, states, and the session-start check-in routine.
 
 | Thread | Repo | Kind | Task | State | Last checked | Next action |
 |--------|------|------|------|-------|--------------|-------------|
-| [#13428](https://github.com/sqlalchemy/sqlalchemy/discussions/13428) | sqlalchemy/sqlalchemy | Discussion | [ISSUE-0001](./tasks/open/ISSUE-0001.md) | waiting-on-maintainer | 2026-07-12 | Watch for maintainer replies; engage per ISSUE-0001 (posted 2026-07-12, answers their #6987) |
+| [#13428](https://github.com/sqlalchemy/sqlalchemy/discussions/13428) | sqlalchemy/sqlalchemy | Discussion | [ISSUE-0001](./tasks/open/ISSUE-0001.md) | waiting-on-maintainer | 2026-07-12 | Watch for maintainer replies; engage per ISSUE-0001 (posted 2026-07-12, answers their unresolved [#6987](https://github.com/sqlalchemy/sqlalchemy/discussions/6987) — owes it a resolution pointer if a fix lands) |
 
 ## Recently concluded
 
