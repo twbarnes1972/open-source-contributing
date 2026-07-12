@@ -14,6 +14,11 @@ engagement — context, evidence, acceptance criteria, outcome — lives in its 
 under `tasks/`. `DISCUSSIONS.md` is only the monitoring index: which upstream threads we are
 in, what state each is in, when we last looked. One row per thread, one owning task per row.
 
+**Multi-thread engagements are one task, many rows.** When one finding spans several upstream
+threads (e.g. a root-cause report cross-posted to duplicate issues), each thread gets its own
+row — states move independently — but all rows point at the same owning task, which holds the
+evidence and makes the close decision once.
+
 **`DISCUSSIONS.md` is a queue, not a log.** It holds Active rows plus a small
 `## Recently concluded` staging section. Concluded rows leave the file on a periodic sweep.
 Traceability does not come from this file:
@@ -78,6 +83,19 @@ Run at every session start (see [SESSIONLOOP.md](../SESSIONLOOP.md)) — it cost
    - **Thread resolved upstream** → follow *Concluding* below.
 3. Report a one-line summary in the session start notes (e.g. "2 active, no new replies").
 
+## Issues we report (or comment on)
+
+For bug reports and root-cause comments on other projects' issue trackers, two extra rules:
+
+- **The terminal event is a verified fix, not a maintainer claim.** When a fix ships, re-run
+  the engagement's reproducer against the new release before concluding the row. Watch for
+  linked PRs, closing commits, and release notes during check-ins.
+- **Stale/bot closure is a decision point, never a conclusion.** An issue auto-closed as
+  stale or "not planned" without maintainer engagement flips the row to `needs-our-reply`:
+  decide (with the operator) whether to ask for a reopen, consolidate our analysis onto a
+  surviving duplicate thread, or consciously abandon — and record the choice on the owning
+  task. Threads carrying our root-cause analysis should not be left to lapse silently.
+
 ## Concluding
 
 A row concludes **when its owning task closes** — one close point, no drift. On task close:
@@ -94,4 +112,4 @@ concluded rows verbatim, plus an optional one-line observation per engagement (r
 what worked). Then clear the staging section. Artifacts are self-contained and disposable once
 any review has consumed them; the durable record stays on the tasks.
 
-<!-- version: v2026.07.12.01 -->
+<!-- version: v2026.07.12.02 -->
