@@ -69,18 +69,24 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
 
 ## Acceptance Criteria
 
-- [ ] Reopen-vs-consolidate decision made with the operator and recorded here: ask to reopen
-      #36884, or move/summarize the root-cause analysis onto #57132 (now the natural primary
-      thread) so it lives on an open issue.
-- [ ] Before any new upstream post: freshness check — confirm the findings still reproduce on
-      the current claude-code release (analysis targets 2.1.143.a06, posted 2026-05-18).
-- [ ] Root-cause analysis ends up on (or linked prominently from) an open, maintainer-visible
-      thread; surviving threads protected from silent stale-closure while un-triaged.
+- [x] Reopen-vs-consolidate decision made with the operator and recorded here: **moot** — the
+      freshness check found both bugs already fixed upstream, so there is no analysis to
+      relocate and no reopen to request (see 2026-07-12 status note).
+- [x] Before any new upstream post: freshness check — **done** by permission-probe: verified
+      on `claude.exe` 2.1.207 (native CLI), both bugs fixed (fix landed silently in
+      2.1.145–2.1.207). Full method/logs in `permission-probe/tasks/closed/ISSUE-0004.md`.
+- [x] Root-cause analysis ends up on (or linked prominently from) an open, maintainer-visible
+      thread — satisfied historically (our analysis on #36884, cross-linked from open #57132
+      by `hwaterer`); now superseded by resolution notes announcing the fix.
 - [ ] All three DISCUSSIONS.md rows checked each session start; substantive replies engaged.
-- [ ] If a fix ships: re-run the permission-probe reproducer matrix against the new release
-      before concluding (per discussion_handling.md "Issues we report").
-- [ ] Task closes on a real outcome — fix verified, rejected with rationale, or consciously
-      abandoned — recorded in `## Work Completed`, with rows concluded in DISCUSSIONS.md.
+- [x] If a fix ships: re-run the permission-probe reproducer against the new release before
+      concluding — **done** (that is exactly the freshness report; per discussion_handling.md
+      "Issues we report", terminal event is a verified fix, satisfied here).
+- [ ] Resolution notes posted on #57132 and #15921 (drafts ready; operator approval pending),
+      each stamped; #15921 note scoped to native-CLI only (VS Code extension symptom NOT
+      claimed fixed).
+- [ ] Task closes on a "fixed independently upstream" outcome — recorded in `## Work
+      Completed`, with all three rows concluded in DISCUSSIONS.md.
 
 ## Status Notes
 
@@ -92,6 +98,25 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
   lands. If the bugs are fixed: verify which release fixed them, then conclude all three
   threads (post a resolution note on #57132/#15921 so followers know, per the operator's
   call) and close this task on a "fixed independently upstream" outcome.
+
+- **2026-07-12 — freshness report received; both bugs FIXED upstream.** permission-probe
+  verified on `claude.exe` 2.1.207 (native CLI, isolated `CLAUDE_CONFIG_DIR` sandbox):
+  **Bug 1** (`XIq` matcher) — path-globbed allow rules now match (`permissionDecisionMs=3`,
+  no-rule control blocked), deny rules override bare allows; confirmed in both `--print`/SDK
+  and the interactive TUI. The old `ruleContent`-reject line is *still in the 2.1.207 binary*
+  — upstream added a separate content-matching path rather than removing the filter.
+  **Bug 2** (`bypassPermissions` gate) — `defaultMode: bypassPermissions` in settings.json
+  now activates (caveat: sandbox had `bypassPermissionsModeAccepted: true` pre-seeded, so
+  first-time activation may still need the warning-dialog acknowledgment). Bonus: the
+  TUI-vs-`--print` MCP-allow divergence (permission-probe ISSUE-0004) also fixed. Fix version
+  unknown — silent, no maintainer comment on any tracked thread. **Disposition:** reopen-vs-
+  consolidate is moot; conclude all three threads via resolution notes. Drafts at
+  `tasks/working_artifacts/ISSUE-0002/resolution-notes-2026-07-12.md` (#57132 + #15921;
+  #15921 scoped native-CLI-only, VS Code extension Bash symptom explicitly not claimed).
+  **#36884** is closed/not_planned — an optional third note there is low-visibility; skipping
+  unless the operator wants it. Awaiting operator approval to post; on approval, stamp drafts,
+  flip rows to a concluded state, fill `## Work Completed`, and close as "fixed independently
+  upstream".
 
 ## Implementation Notes
 
@@ -112,4 +137,4 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
 - Upstream threads: anthropics/claude-code#36884 (closed), #57132, #15921.
 - Sibling engagement pattern: [ISSUE-0001](./ISSUE-0001.md) (SQLAlchemy #13428).
 
-<!-- version: v2026.07.12.02 -->
+<!-- version: v2026.07.12.03 -->
