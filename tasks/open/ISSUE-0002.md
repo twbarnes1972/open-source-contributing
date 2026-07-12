@@ -82,6 +82,17 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
 - [ ] Task closes on a real outcome — fix verified, rejected with rationale, or consciously
       abandoned — recorded in `## Work Completed`, with rows concluded in DISCUSSIONS.md.
 
+## Status Notes
+
+- **2026-07-12 — freshness check delegated.** The operator has permission-probe re-running the
+  verification against the current claude-code release (suspicion: the permission matcher was
+  overhauled — a recent `claude doctor` run had to fix MCP wildcard permission settings).
+  permission-probe will report results back via this repo's INSTRUCTIONS.md intake. The
+  reopen-vs-consolidate decision (and any upstream post) is **on hold** until that report
+  lands. If the bugs are fixed: verify which release fixed them, then conclude all three
+  threads (post a resolution note on #57132/#15921 so followers know, per the operator's
+  call) and close this task on a "fixed independently upstream" outcome.
+
 ## Implementation Notes
 
 - `gh` CLI authed as `twbarnes1972`; full path on this workstation:
@@ -101,4 +112,4 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
 - Upstream threads: anthropics/claude-code#36884 (closed), #57132, #15921.
 - Sibling engagement pattern: [ISSUE-0001](./ISSUE-0001.md) (SQLAlchemy #13428).
 
-<!-- version: v2026.07.12.01 -->
+<!-- version: v2026.07.12.02 -->
