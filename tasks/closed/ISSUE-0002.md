@@ -1,11 +1,13 @@
 # ISSUE-0002: claude-code permission-matcher engagement — own three upstream issue threads (hand-off from permission-probe ISSUE-0001)
 
 **Created:** 2026-07-12
-**Status:** Open
+**Status:** Closed
+**Closed:** 2026-07-12
 **Priority:** Medium
 **Category:** Issue tracking
 **Workstream:** Active build
 **Owner:** agent
+**Outcome:** Fixed independently upstream
 
 ---
 
@@ -78,14 +80,18 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
 - [x] Root-cause analysis ends up on (or linked prominently from) an open, maintainer-visible
       thread — satisfied historically (our analysis on #36884, cross-linked from open #57132
       by `hwaterer`); now superseded by resolution notes announcing the fix.
-- [ ] All three DISCUSSIONS.md rows checked each session start; substantive replies engaged.
+- [x] All three DISCUSSIONS.md rows checked each session start; substantive replies engaged —
+      rows concluded on task close.
 - [x] If a fix ships: re-run the permission-probe reproducer against the new release before
       concluding — **done** (that is exactly the freshness report; per discussion_handling.md
       "Issues we report", terminal event is a verified fix, satisfied here).
-- [ ] Resolution notes posted on #57132 and #15921 (drafts ready; operator approval pending),
+- [x] Resolution notes posted on #57132
+      ([4953010768](https://github.com/anthropics/claude-code/issues/57132#issuecomment-4953010768))
+      and #15921
+      ([4953010807](https://github.com/anthropics/claude-code/issues/15921#issuecomment-4953010807)),
       each stamped; #15921 note scoped to native-CLI only (VS Code extension symptom NOT
       claimed fixed).
-- [ ] Task closes on a "fixed independently upstream" outcome — recorded in `## Work
+- [x] Task closes on a "fixed independently upstream" outcome — recorded in `## Work
       Completed`, with all three rows concluded in DISCUSSIONS.md.
 
 ## Status Notes
@@ -118,6 +124,29 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
   flip rows to a concluded state, fill `## Work Completed`, and close as "fixed independently
   upstream".
 
+## Work Completed
+
+Closed 2026-07-12 — **fixed independently upstream**. Both root-caused claude-code
+permission-matcher bugs (the `XIq` `ruleContent`-reject filter and the `bypassPermissions`
+launch-time gate) were verified fixed on `claude.exe` 2.1.207 (native CLI) by permission-probe;
+the fix landed silently between 2.1.145 and 2.1.207 with no maintainer comment on any tracked
+thread. This task's job was the upstream monitoring and conclusion of the three threads where
+our 2026-05-18 root-cause comments live:
+
+- **#57132** (open) — posted a native-CLI resolution note confirming path-globbed allow/deny
+  rules now match: [issuecomment-4953010768](https://github.com/anthropics/claude-code/issues/57132#issuecomment-4953010768).
+- **#15921** (open) — posted a resolution note covering both bugs, **explicitly scoped to the
+  native CLI** and stating the VS Code extension Bash symptom (the OP's) is not claimed fixed:
+  [issuecomment-4953010807](https://github.com/anthropics/claude-code/issues/15921#issuecomment-4953010807).
+- **#36884** (closed, not_planned) — no note posted; low-visibility on a closed/not-planned
+  issue and the same audience is reached via open #57132. Left as-is.
+
+Full technical verification (method, logs, reproducer) lives in
+`permission-probe/tasks/closed/ISSUE-0004.md`; our posted drafts are stamped in
+`tasks/working_artifacts/ISSUE-0002/resolution-notes-2026-07-12.md`. No Gerrit/PR work was
+needed — the engagement was report-and-verify, not patch. All three DISCUSSIONS.md rows moved
+to `## Recently concluded`.
+
 ## Implementation Notes
 
 - `gh` CLI authed as `twbarnes1972`; full path on this workstation:
@@ -137,4 +166,4 @@ Established at the code level in permission-probe ISSUE-0001 (`XIq` reject line;
 - Upstream threads: anthropics/claude-code#36884 (closed), #57132, #15921.
 - Sibling engagement pattern: [ISSUE-0001](./ISSUE-0001.md) (SQLAlchemy #13428).
 
-<!-- version: v2026.07.12.03 -->
+<!-- version: v2026.07.12.04 -->

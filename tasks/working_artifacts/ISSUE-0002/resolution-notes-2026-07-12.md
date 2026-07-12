@@ -2,7 +2,9 @@
 Resolution-note drafts for the claude-code permission-matcher engagement (ISSUE-0002).
 Source: permission-probe freshness report (both bugs FIXED, verified 2026-07-12 on
 claude.exe 2.1.207 native CLI). Post as: twbarnes1972.
-Status: DRAFT — needs operator approval before posting. Stamp each with its posted URL after.
+Status: POSTED 2026-07-12 as twbarnes1972 (operator-approved).
+  Draft A → https://github.com/anthropics/claude-code/issues/57132#issuecomment-4953010768
+  Draft B → https://github.com/anthropics/claude-code/issues/15921#issuecomment-4953010807
 
 Scope discipline (from the report): our verification covers the NATIVE CLI only. #15921's
 OP symptom (Bash rules ignored in the VS Code *extension*) was never root-caused by us and is
