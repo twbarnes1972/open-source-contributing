@@ -127,6 +127,13 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   and answers CaselIT on the detection prototype. **Time-sensitive** — the rewrite is
   happening now; awaiting operator approval to post.
 
+- **2026-07-12 — reply v3 POSTED** (operator-approved):
+  [discussioncomment-17615486](https://github.com/sqlalchemy/sqlalchemy/discussions/13428#discussioncomment-17615486)
+  (22:07Z). State → waiting-on-maintainer. Next expected: docs rewrite lands, a Gerrit
+  invitation for docs/warning/classification fix, or follow-up questions. Maintainer
+  direction criterion effectively satisfied (docs: yes — rewrite underway; guard: prototype
+  offered, no commitment sought).
+
 ## Implementation Notes
 
 - **First action each session: check #13428 for replies.** `gh` CLI is installed and OAuth'd
@@ -157,4 +164,4 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   `tasks/working_artifacts/issue-0018-aiosqlite-staticpool/` (repro, matrix runner,
   as-posted upstream draft stamped with the URL).
 
-<!-- version: v2026.07.12.03 -->
+<!-- version: v2026.07.12.04 -->
