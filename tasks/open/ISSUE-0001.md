@@ -112,6 +112,21 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   rewritten (v2, evidence-based) — offers docs and/or warning via Gerrit; awaiting operator
   approval to post.
 
+- **2026-07-12 — zzzeek engaged; docs rewrite in flight; cache=shared claim corrected.**
+  [zzzeek posted twice](https://github.com/sqlalchemy/sqlalchemy/discussions/13428#discussioncomment-17615242):
+  recommends `file::memory:?cache=shared&uri=true` + QueuePool/NullPool, and confirms the
+  decade-old memory-db docs section is being rewritten now ("im having claude rewrite it
+  now"). Validated his recipe against the repro: **no silent loss** (sync + aiosqlite; loud
+  immediate `database table is locked` on contention). Reconciled our original post's
+  "cache=shared also loses rows" claim — it was a **URL-spelling artifact**: the
+  `mode=memory&cache=shared` spelling trips `_is_url_file_db()`'s mode check → single-
+  connection pool (StaticPool/SingletonThreadPool) → same loss; forced QueuePool on the
+  identical URL → no loss. The loss follows the pool in every configuration. Reply draft
+  **v3** corrects our claim publicly, feeds validated cache=shared + memdb data (incl. the
+  spelling gotcha and a possible `_is_url_file_db` improvement) to the in-flight rewrite,
+  and answers CaselIT on the detection prototype. **Time-sensitive** — the rewrite is
+  happening now; awaiting operator approval to post.
+
 ## Implementation Notes
 
 - **First action each session: check #13428 for replies.** `gh` CLI is installed and OAuth'd
@@ -142,4 +157,4 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   `tasks/working_artifacts/issue-0018-aiosqlite-staticpool/` (repro, matrix runner,
   as-posted upstream draft stamped with the URL).
 
-<!-- version: v2026.07.12.02 -->
+<!-- version: v2026.07.12.03 -->
