@@ -34,6 +34,7 @@ This repo uses the [stackagentic-library](https://gitea.msiportal.io/msidevopsma
 |---|---|
 | [INSTRUCTIONS.md](INSTRUCTIONS.md) | Human → Agent intake queue. New contributions and hand-offs land here. |
 | [ESCALATIONS.md](ESCALATIONS.md) | Agent → Human concerns raised during autonomous work. |
+| [DISCUSSIONS.md](DISCUSSIONS.md) | Registry of live upstream threads — the monitoring index checked each session (see [tasks/discussion_handling.md](tasks/discussion_handling.md)). |
 | [FEEDBACK.md](FEEDBACK.md) | Bidirectional process-calibration channel. |
 | [SESSION.md](SESSION.md) / [SESSIONLOOP.md](SESSIONLOOP.md) | Session-to-session carryover state and the start/end checklist. |
 | `tasks/open/` → `tasks/closed/` | Task lifecycle. One markdown file per contribution effort. |

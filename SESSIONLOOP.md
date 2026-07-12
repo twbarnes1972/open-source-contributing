@@ -10,6 +10,7 @@ How to open and close a working session. Keep this short -- the checklist, not t
 - Read `CLAUDE.md` for project context (layout, conventions, tooling status)
 - Read `SESSION.md` for carryover state (in-flight tasks, resume hints, open questions)
 - Read `ESCALATIONS.md` (per [tasks/escalation_handling.md](./tasks/escalation_handling.md)): review the `## Pending` blocker register (act on anything newly resolvable; flag anything now stale), and **report the `## Revisit` count** -- if it has crossed ~10 items, prompt for a triage session
+- Run the **discussion check-in** (per [tasks/discussion_handling.md](./tasks/discussion_handling.md)): sweep `DISCUSSIONS.md` `## Active` for new upstream activity via `gh`, stamp `Last checked`, surface anything needing a judgment reply; if `## Recently concluded` has crossed ~10 rows, run the offload sweep
 - Read `FEEDBACK.md` `## From Agent` and `## From Human` -- route any pending items per [tasks/feedback_handling.md](./tasks/feedback_handling.md)
 - Use the session-planning tool
 
