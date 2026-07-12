@@ -1,0 +1,6 @@
+# Secrets — never commit anything in this folder
+secrets/
+
+# stackagentic-library
+.orchestrator/                   # per-machine orchestrator runtime state
+stackagentic-library.local.json  # project-level secrets
