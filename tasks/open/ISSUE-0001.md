@@ -97,6 +97,21 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   `tasks/working_artifacts/ISSUE-0001/reply-draft-13428-2026-07-12.md` — awaiting operator
   approval before posting.
 
+- **2026-07-12 — both fix tracks implemented and validated locally** (operator directive: no
+  untested suggestions upstream). Branch `issue-13428-staticpool-lost-commits` on the local
+  clone (off `main` @ `07e2c9f4e`), 2 commits, 277 insertions, all relevant suites green.
+  **Track A** — StaticPool interleave warning (checkout-time + reset-time, driver
+  `in_transaction`-keyed, zero false positives across their pool/engine/asyncio suites;
+  warning-only). Coverage finding: engine-layer rollbacks are invisible to the pool, so
+  detection is inherently partial — disclosed in the draft. **Track B** — the memdb VFS URL
+  form (`sqlite:///file:/name?vfs=memdb&uri=true`) **already works on main**, giving each
+  session its own connection: repro's lost row survives, contention is loud. Footguns
+  (leading slash, no WAL, lifetime, 3.36+) documented in new pysqlite/aiosqlite docs
+  sections + tests + changelog. Full detail:
+  `tasks/working_artifacts/ISSUE-0001/validation-results-2026-07-12.md`. Reply draft
+  rewritten (v2, evidence-based) — offers docs and/or warning via Gerrit; awaiting operator
+  approval to post.
+
 ## Implementation Notes
 
 - **First action each session: check #13428 for replies.** `gh` CLI is installed and OAuth'd
@@ -127,4 +142,4 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   `tasks/working_artifacts/issue-0018-aiosqlite-staticpool/` (repro, matrix runner,
   as-posted upstream draft stamped with the URL).
 
-<!-- version: v2026.07.12.01 -->
+<!-- version: v2026.07.12.02 -->

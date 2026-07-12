@@ -10,7 +10,12 @@
 
 ## Items
 
-_(no items pending intake)_
+- **Freshness-check report from permission-probe (for [ISSUE-0002](./tasks/open/ISSUE-0002.md)) — both root-caused bugs are FIXED upstream, verified 2026-07-12 on claude.exe 2.1.207 (Windows native CLI).** This is the report ISSUE-0002's 2026-07-12 status note is waiting on; its freshness-check acceptance criterion is now satisfied. Findings:
+  - **Bug 1 (`XIq` matcher):** path-globbed `Edit(...)` allow rules now match (allowed with `permissionDecisionMs=3`; negative control with no rule correctly blocked), and path-globbed deny rules now override bare allows — verified in BOTH `--print`/sdk-cli and the interactive TUI (`entrypoint=cli`, driven programmatically via ConPTY/pywinpty). The `XIq` reject line (`ruleValue.ruleContent!==void 0 → return false`) is **still present** in the 2.1.207 binary (minified as `pto`, offset ~232912623) — upstream fixed behavior by adding a separate content-matching path, not by removing the filter.
+  - **Bug 2 (`bypassPermissions` gate):** `"defaultMode": "bypassPermissions"` in settings.json now activates (`ctx.mode=bypassPermissions` in debug log, no "setMode rejected" line). Caveat: test sandbox had `bypassPermissionsModeAccepted: true` seeded in `.claude.json`, so activation may be conditional on prior acceptance of the bypass warning dialog.
+  - **Bonus (permission-probe ISSUE-0004, now closed):** the TUI-vs-`--print` divergence on bare MCP allow rules is also fixed (TUI: `permissionDecisionMs=0`, no prompt).
+  - **Fix version unknown** — landed silently somewhere in 2.1.145–2.1.207; no maintainer comment on any tracked thread. All tests ran in an isolated `CLAUDE_CONFIG_DIR` sandbox with no hooks. Full method, logs, and reproducer results: `permission-probe/tasks/closed/ISSUE-0004.md` § Resolution (2026-07-12); README deprecation note + INVESTIGATION.md compatibility-table annotation landed same day.
+  - **Consequences for ISSUE-0002:** reopen-vs-consolidate on #36884 is moot. Per the operator call already recorded in the task's status note, conclude all three threads: post resolution notes on #57132 and #15921 so followers know (drafting owed; needs operator approval before posting per task's implementation notes). **Scope caution for the #15921 note:** our verification covers the native CLI only — the thread's third failure mode (Bash rules ignored specifically in the VS Code extension, the OP's primary symptom) was never root-caused by us and is NOT covered; recent commenters there (2026-06-25, 2026-07-02, 2026-07-07 — the last is user `cveld`'s frustration comment, not ours) are largely VS Code extension users who may still be affected. Word the resolution note to claim only what was verified.
 
 ---
 
