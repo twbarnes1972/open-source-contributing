@@ -10,19 +10,22 @@ current-state view rather than an ever-growing log.
 
 ## Current Focus
 
-Watch SQLAlchemy discussion #13428 (ISSUE-0001). Run the discussion check-in at session start
-(`gh` full path — see CLAUDE.md) — it's the only Active engagement.
+Monitor SQLAlchemy issue #13433 + discussion #13428 (ISSUE-0001). Run the discussion check-in
+at session start (`gh` full path — see CLAUDE.md) — two Active registry rows, one engagement.
 
 ## In-Flight Tasks
 
-- **ISSUE-0001** (open, waiting-on-maintainer) — SQLAlchemy StaticPool silent lost-commits,
-  discussion #13428. Our reply v3 is posted; both fix tracks (StaticPool interleave warning +
-  memdb docs/tests) are implemented and validated on local branch
-  `issue-13428-staticpool-lost-commits`. **Holding** for zzzeek to read our post or the docs
-  rewrite to land. Follow-up triggers in the task's status notes: if the rewrite lands with
-  non-interleaved examples, gently offer the discriminating interleaved-shape variant; if a
-  maintainer invites it, reshape the 2 local commits into Gerrit changes (one commit +
-  Change-Id per change).
+- **ISSUE-0001** (open, waiting-on-maintainer) — SQLAlchemy StaticPool silent lost-commits.
+  Discussion #13428 reached its resolution plan 2026-07-13: docs rewrite landed
+  (`702a7f11d` main + `rel_2_0` cherry-pick, refs #13428/#6987), and zzzeek's
+  deprecate-pool-guessing plan became **issue #13433** (milestone 2.1, unassigned).
+  Operator posture (SES-001, 2026-07-14): **monitor only, no further posts** — no #13433
+  implementation offer, no #6987 pointer (zzzeek answered it directly), no #13428
+  acknowledgment. **Closure gate:** when the #13433 fix lands as a commit/release, update
+  the local clone (`C:\Data\open-source\sqlalchemy`) and validate it resolves our issue via
+  the interleaved repro matrix; report on #13433 only with operator approval. Local branch
+  `issue-13428-staticpool-lost-commits` stays shelved (Track A not their direction; Track B
+  superseded by the docs rewrite).
 
 ## Open Questions
 
@@ -36,6 +39,14 @@ Watch SQLAlchemy discussion #13428 (ISSUE-0001). Run the discussion check-in at 
   proves out.
 
 ## Recent Sessions
+
+### 2026-07-14 — SES-001: #13428 resolution plan reached; posture set to monitor-and-validate
+Check-in found maintainers acted on our v3: docs rewrite landed citing #13428/#6987 (interleave
+mechanism correctly described — correction trigger didn't fire), CaselIT replied to our post,
+zzzeek's deprecation plan filed as #13433. Operator set monitor-only posture (no posts on
+#13433/#6987/#13428; zzzeek had already answered #6987 directly). New closure gate on
+ISSUE-0001: validate the #13433 fix with our interleaved repro matrix when it lands. #13433
+registered in DISCUSSIONS.md. Zero upstream posts this session.
 
 ### 2026-07-12 — Repo bootstrap + first two engagements
 Set up the repo from scratch: README, `.gitignore` (secrets/, .orchestrator/,

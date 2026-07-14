@@ -79,8 +79,14 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
       before implementation in `pool/impl.py`, then submitted via Gerrit.
 - [ ] Task closes on a real outcome — change merged, fixed independently upstream, rejected
       with rationale, or consciously abandoned — recorded in `## Work Completed`.
-- [ ] If a fix or docs change lands, a resolution pointer is posted back to the original 2021
-      discussion #6987.
+- [x] If a fix or docs change lands, a resolution pointer is posted back to the original 2021
+      discussion #6987. **Satisfied by upstream 2026-07-12:** zzzeek posted the shared-cache
+      answer directly on #6987
+      ([discussioncomment-17615241](https://github.com/sqlalchemy/sqlalchemy/discussions/6987#discussioncomment-17615241));
+      operator decision 2026-07-14: no pointer from us — it would be noise.
+- [ ] When the #13433 fix lands as a commit/release: update the local sqlalchemy clone and
+      confirm it resolves our original issue (interleaved repro matrix — the discriminating
+      shape); report validation results on #13433 only with operator approval.
 
 ## Status Notes
 
@@ -144,6 +150,46 @@ SQLAlchemy has strong opinions on pool internals and will usually sketch the acc
   Decision: **no immediate follow-up** — our post already carries the discriminating data;
   wait for him to read it. Follow-up trigger: docs rewrite lands with non-interleaved
   examples/tests, or he responds. Then offer the interleaved-shape variant gently.
+
+- **2026-07-14 — maintainers acted on our post: docs rewrite landed + deprecation issue filed.**
+  Session check-in found three developments (all 2026-07-12/13, after our v3):
+  1. **Docs rewrite landed** — zzzeek pushed
+     [`702a7f11d`](https://github.com/sqlalchemy/sqlalchemy/commit/702a7f11d) (main) /
+     `a3f08579a` (cherry-pick to `rel_2_0`), "rewrite SQLite in-memory database docs for
+     concurrency", `References: #13428, #6987`. Recommends `file::memory:?cache=shared&uri=true`
+     (QueuePool, per-checkout connections), demotes StaticPool with a warning that **correctly
+     describes the interleave mechanism** (one session's ROLLBACK discards another's uncommitted
+     work). The "docs land with non-interleaved examples" correction trigger does **not** fire.
+  2. **CaselIT replied directly to our v3** (13:10Z Jul 13): *"The best option is likely to fix
+     the handling of the two modes so that we avoid having different outcome depending on the
+     spelling of the url"* — acting on our URL-spelling-artifact finding.
+  3. **zzzeek proposed a concrete plan** quoting `_is_url_file_db()` (the function our v3
+     flagged): in URI mode disable all pool-guessing → QueuePool/AsyncAdaptedQueuePool
+     unconditionally; deprecation warnings in 2.1, removal in 2.2. CaselIT filed
+     **[issue #13433](https://github.com/sqlalchemy/sqlalchemy/issues/13433)** ("Deprecate
+     guess-the-pool in sqlite memory", milestone 2.1, labels: sql / connection pool / use case).
+  **Implications for our local fix tracks:** Track B (memdb docs) is superseded by zzzeek's
+  shared-cache rewrite. Track A (StaticPool interleave warning) was not adopted as direction —
+  their chosen fix is deprecating the URL guessing instead; Track A stays shelved unless invited.
+  **Now actionable:** (a) acceptance criterion "post resolution pointer back to 2021 #6987"
+  has triggered — docs change landed; (b) judgment call whether to offer implementing #13433
+  via Gerrit (unassigned, concrete spec from zzzeek). Both are outward-facing → operator
+  approval needed.
+
+- **2026-07-14 — operator decisions (SES-001): monitor-and-validate posture; no further posts.**
+  1. **#13433:** monitor only — no implementation offer, no comment now. When the fix lands as
+     a commit/release, update the local clone and validate it resolves our original issue with
+     the interleaved repro matrix (new acceptance criterion). zzzeek ships his own specs fast;
+     our unique remaining asset is the discriminating repro shape.
+  2. **#6987:** no resolution pointer from us — zzzeek already answered the 2021 thread
+     directly (2026-07-12,
+     [discussioncomment-17615241](https://github.com/sqlalchemy/sqlalchemy/discussions/6987#discussioncomment-17615241),
+     nested reply — top-level comment queries miss it). Criterion checked off as satisfied
+     upstream.
+  3. **#13428:** no acknowledgment comment — the thread reached its resolution plan; silence.
+  State: waiting-on-maintainer. Watch triggers: Gerrit change / commits referencing #13433,
+  #13433 state changes, any direct reply to our post. Track A (interleave warning) stays
+  shelved unless invited; Track B superseded by the landed docs rewrite.
 
 ## Implementation Notes
 
