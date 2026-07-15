@@ -22,11 +22,5 @@ gates; mark resolved inline, then let it leave. None outstanding.)_
 
 ## Revisit
 
-_(Autonomous veto-log: decision · reversal cost · explicit veto window.)_
-
-- **2026-07-12 · Skipped a resolution note on claude-code #36884 (ISSUE-0002).** Posted the
-  fix-confirmation notes only to the two open threads (#57132, #15921), not to #36884, which is
-  closed/not_planned — reasoning: low visibility on a closed issue, and the same audience is
-  reached via open #57132 where our analysis is already cross-linked. **Reversal cost: trivial**
-  — a note can still be added to #36884 anytime. Veto window: open until you say otherwise; if
-  you'd rather close that loop too, say so and I'll post a brief note there.
+_(Autonomous veto-log: decision · reversal cost · explicit veto window. Empty — last triage
+2026-07-14, see `tasks/working_artifacts/escalation-triage/`.)_
